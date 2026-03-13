@@ -135,7 +135,6 @@ export default function AboutPage() {
                 </li>
               ))}
             </ul>
-            </div>
           </motion.div>
         </div>
       </section>
