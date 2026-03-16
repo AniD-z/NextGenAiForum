@@ -136,6 +136,14 @@ export function Footer() {
             >
               Terms of Service
             </Link>
+            <a
+              href="https://www.teyzsec.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              Powered by TeyzSec
+            </a>
           </div>
         </div>
       </div>
