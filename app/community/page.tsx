@@ -268,6 +268,35 @@ export default function CommunityPage() {
         </div>
       </section>
 
+      {/* Student Congress and Competition */}
+      <section className="py-16 lg:py-24">
+        <div className="container mx-auto px-4 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 to-accent/10 p-8 lg:p-10">
+              <h2 className="text-2xl md:text-3xl font-bold font-display text-foreground mb-4">
+                Student Congress/Competition
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                Multiple opportunities for Students Community are being planned to
+                encourage participation. Competition to demonstrate their skills in
+                AI for different applications; Student Congress to participate and
+                discuss their future plans; Volunteering opportunities to this
+                conference and so on.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Look for more details on this page.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       <Footer />
     </main>
   )
