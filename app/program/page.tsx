@@ -206,6 +206,83 @@ const scheduleData = {
   ],
 }
 
+const programMenuSections = [
+  {
+    title: "Symposium (Research Paper Call)",
+    items: [
+      "AI in Industry and Manufacturing",
+      "AI in Healthcare and Bio-Tech",
+      "AI for Smart Cities and Infrastructure",
+      "AI in Telecommunications and Networks",
+      "AI in Finance and Business Analytics",
+      "AI in Agriculture and Education",
+      "AI in Transportation: land, marine and space",
+      "Edge AI and IoT Systems",
+      "AI Startups and Innovation",
+    ],
+  },
+  {
+    title: "Industry Exhibition Zone",
+    items: [
+      "AI startups showcase",
+      "IoT hardware demos",
+      "Enterprise AI solutions",
+      "Sponsor booths",
+    ],
+  },
+  {
+    title: "Hands-on Workshops (Parallel) Example",
+    items: [
+      "Workshop 1: LLM Deployment in Enterprise",
+      "Workshop 2: Edge AI on Low-Power Devices",
+      "Workshop 3: MLOps & AI DevOps in Production",
+      "Workshop 4: Agentic AI",
+    ],
+  },
+  {
+    title: "Hackathon and Innovation Challenge",
+    items: [
+      "24-hour AI build challenge",
+      "Industry problem statements",
+      "Sponsored challenges",
+      "Prize awards",
+    ],
+  },
+  {
+    title: "Panel Discussions",
+    items: [
+      "Where we stand in AI?",
+      "Is AI Future or shortterm hype?",
+      "Role of AI in Space and Defence: Opportunities for Startups",
+    ],
+  },
+  {
+    title: "AI Product Demo Arena",
+    items: [
+      "10-minute rapid demo sessions",
+      "Startup pitching",
+      "Live AI tool demonstrations",
+    ],
+  },
+  {
+    title: "Certification Program",
+    items: [
+      "1-day AI professional certification",
+      "AI Ethics certification",
+      "Industry co-branded certification",
+    ],
+  },
+  {
+    title: "Networking Events",
+    items: [
+      "AI Leaders Roundtable",
+      "Women in AI session",
+      "Startup-Investor Meet",
+      "Closed-door CXO discussion",
+    ],
+  },
+]
+
 const typeColors: Record<string, string> = {
   keynote: "bg-primary/20 text-primary border-primary/30",
   panel: "bg-blue-500/20 text-blue-400 border-blue-500/30",
@@ -345,6 +422,50 @@ export default function ProgramPage() {
           >
             Schedule is subject to change. Speaker details will be announced soon.
           </motion.p>
+        </div>
+      </section>
+
+      {/* Program Menu */}
+      <section className="pb-24">
+        <div className="container mx-auto px-4 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-5xl mx-auto"
+          >
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-4xl font-bold font-display mb-3">
+                Program Menu
+              </h2>
+              <p className="text-muted-foreground">
+                Explore the full set of symposium tracks, industry activities,
+                workshops, and networking sessions.
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              {programMenuSections.map((section) => (
+                <div
+                  key={section.title}
+                  className="rounded-xl border border-border bg-card/50 p-6"
+                >
+                  <h3 className="text-lg font-semibold text-foreground mb-3">
+                    {section.title}
+                  </h3>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    {section.items.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
