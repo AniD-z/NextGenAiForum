@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Space_Grotesk, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+import { buildMetadata, siteMetadata } from '@/lib/metadata'
 
 const spaceGrotesk = Space_Grotesk({ 
   subsets: ["latin"],
@@ -14,30 +15,79 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'NextGenAIForum 2027 | International AI Conference - Bangalore, India',
-  description: 'The preeminent international conference converging Generative AI, 6G Orchestration, and Global Technology Policy. April 9-10, 2027 in Bangalore, India.',
-  keywords: ['AI Conference', 'Artificial Intelligence', 'Generative AI', 'Agentic AI', '6G', 'Machine Learning', 'Bangalore', 'India'],
-  openGraph: {
-    title: 'NextGenAIForum 2027 | The Agentic Network',
-    description: 'Defining the Agentic Network & Strategic AI Autonomy. April 9-10, 2027 - Bangalore, India',
-    type: 'website',
+  metadataBase: new URL(siteMetadata.url),
+  applicationName: siteMetadata.name,
+  authors: [{ name: siteMetadata.name, url: siteMetadata.url }],
+  creator: siteMetadata.name,
+  publisher: siteMetadata.name,
+  manifest: '/site.webmanifest',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
+  ...buildMetadata({
+    title: 'NextGenAIForum 2027 | International AI Conference in Bangalore, India',
+    description:
+      'Join NextGenAIForum 2027 in Bangalore for Generative AI, agentic systems, 6G orchestration, standards, and strategic AI autonomy across research, industry, and policy.',
+    path: '/',
+    keywords: [
+      'AI conference',
+      'artificial intelligence conference India',
+      'generative AI',
+      'agentic systems',
+      '6G orchestration',
+      'Bangalore technology conference',
+      'strategic AI autonomy',
+      'NextGenAIForum 2027',
+    ],
+  }),
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
+        url: '/favicon.ico',
+        sizes: 'any',
       },
       {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
+        url: '/favicon-16x16.png',
+        type: 'image/png',
+        sizes: '16x16',
       },
       {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
+        url: '/favicon-32x32.png',
+        type: 'image/png',
+        sizes: '32x32',
+      },
+      {
+        url: '/android-chrome-192x192.png',
+        type: 'image/png',
+        sizes: '192x192',
+      },
+      {
+        url: '/android-chrome-512x512.png',
+        type: 'image/png',
+        sizes: '512x512',
       },
     ],
-    apple: '/apple-icon.png',
+    apple: [
+      {
+        url: '/apple-touch-icon.png',
+        type: 'image/png',
+        sizes: '180x180',
+      },
+      {
+        url: '/apple-icon.png',
+        type: 'image/png',
+        sizes: '180x180',
+      },
+    ],
+    shortcut: '/favicon.ico',
   },
 }
 
