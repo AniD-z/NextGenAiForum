@@ -317,6 +317,11 @@ export default function ProgramPage() {
               Two days of keynotes, panels, workshops, and networking opportunities 
               with world-leading AI researchers and industry pioneers.
             </p>
+            <div className="mt-6 flex justify-center">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-sm text-amber-500 font-medium">
+                ⚠️ Tentative Schedule - Under Construction
+              </span>
+            </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-6">
               Program{" "}
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
