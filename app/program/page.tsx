@@ -301,7 +301,7 @@ export default function ProgramPage() {
       <Navigation />
 
       {/* Hero */}
-      <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
+      <section className="pt-32 pb-8 lg:pt-40 lg:pb-12">
         <div className="container mx-auto px-4 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -309,9 +309,62 @@ export default function ProgramPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-sm text-primary font-medium mb-6">
-              Conference Schedule
-            </span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-6">
+              Program{" "}
+              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                (Conference Events)
+              </span>
+            </h1>
+            <p className="text-muted-foreground">
+                Explore the full set of symposium tracks, industry activities,
+                workshops, and networking sessions.
+              </p>
+          </motion.div>
+        </div>
+      </section>
+      
+      {/* Program Menu */}
+      <section className="pb-12 lg:pb-16">
+        <div className="container mx-auto px-4 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-5xl mx-auto"
+          >
+            <div className="grid gap-6 md:grid-cols-2">
+              {programMenuSections.map((section) => (
+                <div
+                  key={section.title}
+                  className="rounded-xl border border-border bg-card/50 p-6"
+                >
+                  <h3 className="text-lg font-semibold text-foreground mb-3">
+                    {section.title}
+                  </h3>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    {section.items.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+      {/* Hero */}
+      <section className="pt-8 pb-16 lg:pt-12 lg:pb-20">
+        <div className="container mx-auto px-4 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto text-center"
+          >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-6">
               Program{" "}
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -325,7 +378,6 @@ export default function ProgramPage() {
           </motion.div>
         </div>
       </section>
-
       {/* Schedule */}
       <section className="pb-24">
         <div className="container mx-auto px-4 lg:px-8">
@@ -360,7 +412,7 @@ export default function ProgramPage() {
           >
             {scheduleData[activeDay as keyof typeof scheduleData].map((item, index) => (
               <motion.div
-                key={index}
+                key={`${item.time}-${item.title}`}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
@@ -425,49 +477,7 @@ export default function ProgramPage() {
         </div>
       </section>
 
-      {/* Program Menu */}
-      <section className="pb-24">
-        <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-5xl mx-auto"
-          >
-            <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-bold font-display mb-3">
-                Program Menu
-              </h2>
-              <p className="text-muted-foreground">
-                Explore the full set of symposium tracks, industry activities,
-                workshops, and networking sessions.
-              </p>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-2">
-              {programMenuSections.map((section) => (
-                <div
-                  key={section.title}
-                  className="rounded-xl border border-border bg-card/50 p-6"
-                >
-                  <h3 className="text-lg font-semibold text-foreground mb-3">
-                    {section.title}
-                  </h3>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    {section.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      
 
       <Footer />
     </main>
