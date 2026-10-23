@@ -1,12 +1,52 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { Calendar, MapPin } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
+const eventStart = new Date("2027-04-09T00:00:00+05:30")
+const eventEnd = new Date("2027-04-10T23:59:59+05:30")
+
+type Countdown = {
+  days: number
+  hours: number
+  minutes: number
+  seconds: number
+  status: "upcoming" | "in-progress" | "ended"
+}
+
+function getCountdown(): Countdown {
+  const now = Date.now()
+  const millisecondsRemaining = Math.max(0, eventStart.getTime() - now)
+
+  return {
+    days: Math.floor(millisecondsRemaining / 86_400_000),
+    hours: Math.floor((millisecondsRemaining % 86_400_000) / 3_600_000),
+    minutes: Math.floor((millisecondsRemaining % 3_600_000) / 60_000),
+    seconds: Math.floor((millisecondsRemaining % 60_000) / 1_000),
+    status:
+      now < eventStart.getTime()
+        ? "upcoming"
+        : now <= eventEnd.getTime()
+          ? "in-progress"
+          : "ended",
+  }
+}
+
 export function HeroBanner() {
+  const [countdown, setCountdown] = useState<Countdown | null>(null)
+
+  useEffect(() => {
+    const updateCountdown = () => setCountdown(getCountdown())
+    updateCountdown()
+
+    const interval = window.setInterval(updateCountdown, 1000)
+    return () => window.clearInterval(interval)
+  }, [])
+
   return (
     <section className="relative flex min-h-screen min-h-[100svh] items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
@@ -149,31 +189,51 @@ export function HeroBanner() {
             </Link>
           </motion.div>
 
-          {/* Countdown Timer */}
+          {/* Countdown to the event start */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.5 }}
             className="mt-12 p-6 rounded-2xl bg-card/80 backdrop-blur-sm border border-border shadow-xl"
           >
-            <div className="grid grid-cols-4 gap-4 text-center">
-              <div>
-                <div className="text-3xl md:text-4xl font-bold text-primary">228</div>
-                <div className="text-sm text-muted-foreground mt-1">Days</div>
-              </div>
-              <div>
-                <div className="text-3xl md:text-4xl font-bold text-primary">03</div>
-                <div className="text-sm text-muted-foreground mt-1">Hours</div>
-              </div>
-              <div>
-                <div className="text-3xl md:text-4xl font-bold text-primary">02</div>
-                <div className="text-sm text-muted-foreground mt-1">Minutes</div>
-              </div>
-              <div>
-                <div className="text-3xl md:text-4xl font-bold text-primary">46</div>
-                <div className="text-sm text-muted-foreground mt-1">Second</div>
-              </div>
-            </div>
+            {countdown?.status === "ended" ? (
+              <p className="text-center text-lg font-semibold text-foreground">
+                The forum has concluded.
+              </p>
+            ) : (
+              <>
+                {countdown?.status === "in-progress" && (
+                  <p className="text-center text-sm font-medium text-primary mb-4">
+                    The forum is underway
+                  </p>
+                )}
+                <div
+                  className="grid grid-cols-4 gap-4 text-center tabular-nums"
+                  role="timer"
+                  aria-label={
+                    !countdown
+                      ? "Countdown to the forum"
+                      : countdown.status === "upcoming"
+                        ? `${countdown.days} days, ${countdown.hours} hours, ${countdown.minutes} minutes, ${countdown.seconds} seconds until the forum`
+                        : "The forum is underway"
+                  }
+                >
+                  {[
+                    ["Days", countdown?.days],
+                    ["Hours", countdown?.hours],
+                    ["Minutes", countdown?.minutes],
+                    ["Seconds", countdown?.seconds],
+                  ].map(([label, value]) => (
+                    <div key={label}>
+                      <div className="text-3xl md:text-4xl font-bold text-primary">
+                        {value === undefined ? "--" : String(value).padStart(2, "0")}
+                      </div>
+                      <div className="text-sm text-muted-foreground mt-1">{label}</div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
           </motion.div>
         </div>
       </div>
