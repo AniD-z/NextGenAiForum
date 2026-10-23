@@ -23,20 +23,26 @@ export function NeuralNetworkBg() {
 
     let animationId: number
     let nodes: Node[] = []
+    let width = 0
+    let height = 0
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2)
 
     const resize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+      width = window.innerWidth
+      height = window.innerHeight
+      canvas.width = Math.round(width * pixelRatio)
+      canvas.height = Math.round(height * pixelRatio)
+      ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0)
       initNodes()
     }
 
     const initNodes = () => {
-      const nodeCount = Math.floor((canvas.width * canvas.height) / 25000)
+      const nodeCount = Math.floor((width * height) / 25000)
       nodes = []
       for (let i = 0; i < nodeCount; i++) {
         nodes.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
+          x: Math.random() * width,
+          y: Math.random() * height,
           vx: (Math.random() - 0.5) * 0.3,
           vy: (Math.random() - 0.5) * 0.3,
           radius: Math.random() * 2 + 1,
@@ -90,8 +96,7 @@ export function NeuralNetworkBg() {
     }
 
     const animate = (time: number) => {
-      ctx.fillStyle = "rgba(255, 255, 255, 0.05)"
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
+      ctx.clearRect(0, 0, width, height)
 
       const maxDistance = 150
 
@@ -114,12 +119,12 @@ export function NeuralNetworkBg() {
         node.y += node.vy
 
         // Bounce off edges
-        if (node.x < 0 || node.x > canvas.width) node.vx *= -1
-        if (node.y < 0 || node.y > canvas.height) node.vy *= -1
+        if (node.x < 0 || node.x > width) node.vx *= -1
+        if (node.y < 0 || node.y > height) node.vy *= -1
 
         // Keep in bounds
-        node.x = Math.max(0, Math.min(canvas.width, node.x))
-        node.y = Math.max(0, Math.min(canvas.height, node.y))
+        node.x = Math.max(0, Math.min(width, node.x))
+        node.y = Math.max(0, Math.min(height, node.y))
 
         drawNode(node, time)
       })
@@ -129,10 +134,6 @@ export function NeuralNetworkBg() {
 
     resize()
     window.addEventListener("resize", resize)
-
-    // Clear canvas initially
-    ctx.fillStyle = "rgb(10, 10, 20)"
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     animationId = requestAnimationFrame(animate)
 
@@ -146,7 +147,7 @@ export function NeuralNetworkBg() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 -z-10 opacity-60"
-      style={{ background: "linear-gradient(180deg, rgb(8, 8, 20) 0%, rgb(12, 12, 30) 100%)" }}
+      aria-hidden="true"
     />
   )
 }
