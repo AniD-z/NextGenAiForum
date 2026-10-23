@@ -4,7 +4,6 @@ import { motion } from "framer-motion"
 import { useState } from "react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
-import { NeuralNetworkBg } from "@/components/neural-network-bg"
 import { Clock, MapPin, Users, Mic, BookOpen, Coffee } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -35,7 +34,7 @@ const scheduleData = {
       title: "Keynote: The Agentic Network Revolution",
       type: "keynote",
       icon: Mic,
-      speaker: "Speaker to be announced",
+      speaker: "",
       description: "Exploring the paradigm shift toward autonomous AI systems",
       location: "Main Auditorium",
     },
@@ -121,7 +120,7 @@ const scheduleData = {
       title: "Keynote: Strategic AI Autonomy",
       type: "keynote",
       icon: Mic,
-      speaker: "Speaker to be announced",
+      speaker: "",
       description: "Building sovereign AI capabilities for national infrastructure",
       location: "Main Auditorium",
     },
@@ -130,7 +129,7 @@ const scheduleData = {
       title: "Keynote: The Future of Agentic Systems",
       type: "keynote",
       icon: Mic,
-      speaker: "Speaker to be announced",
+      speaker: "",
       description: "From rule-based to autonomous self-optimizing systems",
       location: "Main Auditorium",
     },
@@ -297,7 +296,6 @@ export default function ProgramPage() {
 
   return (
     <main className="min-h-screen">
-      <NeuralNetworkBg />
       <Navigation />
 
       {/* Hero */}
@@ -310,7 +308,7 @@ export default function ProgramPage() {
             className="max-w-4xl mx-auto text-center"
           >
             <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-sm text-primary font-medium mb-6">
-              Conference Schedule
+              Proposed Conference Schedule
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-6">
               Program{" "}
@@ -331,7 +329,7 @@ export default function ProgramPage() {
         <div className="container mx-auto px-4 lg:px-8">
           {/* Day Tabs */}
           <div className="flex justify-center mb-12">
-            <div className="inline-flex p-1 rounded-xl bg-card border border-border">
+            <div className="inline-flex flex-wrap justify-center p-1 rounded-xl bg-card border border-border">
               {days.map((day) => (
                 <Button
                   key={day.id}
@@ -420,7 +418,7 @@ export default function ProgramPage() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="text-center text-sm text-muted-foreground mt-12"
           >
-            Schedule is subject to change. Speaker details will be announced soon.
+            Proposed schedule; session times and rooms are subject to confirmation. All times are India Standard Time (UTC+5:30).
           </motion.p>
         </div>
       </section>

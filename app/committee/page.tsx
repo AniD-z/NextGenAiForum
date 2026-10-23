@@ -3,7 +3,6 @@
 import { motion } from "framer-motion"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
-import { NeuralNetworkBg } from "@/components/neural-network-bg"
 import { ArrowUpRight, Users } from "lucide-react"
 
 const committeeSections = [
@@ -60,7 +59,6 @@ const committeeSections = [
 export default function CommitteePage() {
   return (
     <main className="min-h-screen">
-      <NeuralNetworkBg />
       <Navigation />
 
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
@@ -81,7 +79,7 @@ export default function CommitteePage() {
               </span>
             </h1>
             <p className="mx-auto max-w-3xl text-lg leading-relaxed text-muted-foreground">
-              Explore the organizing structure behind NextGenAIForum, including the committees and leadership roles responsible for strategic direction, execution, and technical quality.
+              Explore the committees responsible for strategic direction, organization, and technical quality. Committee membership has not yet been published; contact navinkumar@ieee.org for committee inquiries.
             </p>
           </motion.div>
 
@@ -147,9 +145,6 @@ export default function CommitteePage() {
                         </li>
                       ))}
                     </ul>
-                    <div className="mt-6 rounded-2xl border border-dashed border-border bg-background/80 p-4 text-sm text-muted-foreground">
-                      Member names and detailed roles can be added here as they are finalized.
-                    </div>
                   </div>
                 </div>
               </motion.section>
